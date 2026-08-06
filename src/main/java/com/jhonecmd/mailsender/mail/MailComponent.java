@@ -13,11 +13,11 @@ import java.util.Map;
 
 @Slf4j
 @AllArgsConstructor
-public class MailComponent {
+public abstract class MailComponent {
 
     private JavaMailSender javaMailSender;
 
-    public void sendSimpleMail(MailMessage mailMessage) {
+    protected void sendSimpleMail(MailMessage mailMessage) {
 
         log.info("Sending simple email.");
 
@@ -29,7 +29,6 @@ public class MailComponent {
             simpleMailMessage.setText(mailMessage.getMessage());
 
             javaMailSender.send(simpleMailMessage);
-
             log.info("Simple mail sent successfully.");
 
         } catch (Exception e) {
@@ -37,7 +36,7 @@ public class MailComponent {
         }
     }
 
-    public void sendAdvancedMail(MailMessage mailMessage) {
+    protected void sendAdvancedMail(MailMessage mailMessage) {
 
         log.info("Sending advanced email.");
 
@@ -48,7 +47,7 @@ public class MailComponent {
             helper.setTo(mailMessage.getTo());
             helper.setFrom(mailMessage.getFrom());
             helper.setSubject(mailMessage.getSubject());
-            helper.setText(mailMessage.getMessage());
+            helper.setText(mailMessage.getMessage(), true);
 
             if (!ObjectUtils.isEmpty(mailMessage.getAttachments())) {
                 for (Map.Entry<String, ClassPathResource> map: mailMessage.getAttachments().entrySet()) {
@@ -58,10 +57,13 @@ public class MailComponent {
 
             if (!ObjectUtils.isEmpty(mailMessage.getAttachments())) {
                 for (Map.Entry<String, ClassPathResource> map: mailMessage.getAttachments().entrySet()) {
-                    helper.addAttachment(map.getKey(), map.getValue());
+                    helper.addInline(map.getKey(), map.getValue());
                 }
             }
 
+
+            javaMailSender.send(mimeMessage);
+            log.info("Advanced mail sent successfully.");
 
         } catch (Exception e) {
             log.error("Error when tried to send the advanced mail.");
