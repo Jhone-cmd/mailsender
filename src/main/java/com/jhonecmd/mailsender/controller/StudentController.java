@@ -27,7 +27,7 @@ public class StudentController {
                     .email(studentDTO.getEmail()).password(studentDTO.getPassword()).build();
 
             studentService.execute(student);
-            return ResponseEntity.status(HttpStatus.CREATED).body(student.getId());
+            return ResponseEntity.status(HttpStatus.CREATED).body("id: " + student.getId());
 
         } catch (StudentAlreadyExists e) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
