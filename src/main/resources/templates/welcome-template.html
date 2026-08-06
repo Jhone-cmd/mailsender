@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Boas-vindas</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body style="margin: 0; padding: 0; background-color: #121214;">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+        <td style="padding: 20px 0 30px 0;">
+            <table align="center" cellpadding="0" cellspacing="0" width="600"
+                   style="border: 1px solid #323238; border-collapse: collapse;">
+                <!-- HEADER COM LOGO -->
+                <tr>
+                    <td align="center" bgcolor="#121214" style="padding: 40px 0 30px 0;">
+                        <img src="cid:headerLogo"
+                             alt="Java Mail Sender"
+                             width="350"
+                             style="display: block; width: 100%; max-width: 350px; height: auto; border: 0; outline: none;" />
+                    </td>
+                </tr>
+
+                <!-- CORPO DO E-MAIL -->
+                <tr>
+                    <td bgcolor="#121214" style="padding: 40px 30px 40px 30px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%"
+                               style="color: #ffffff; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px;">
+                            <tr>
+                                <td
+                                        style="padding: 10px 0 15px 0; font-size: 20px; font-weight: bold; color: #ffffff;">
+                                    Seja bem-vindo(a), <span th:text="${name}">Maria Silva</span>! 🎉
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0px 0 20px 0; color: #e1e1e6;">
+                                    Estamos muito felizes em ter você conosco. Seu cadastro foi realizado com
+                                    sucesso! Confira abaixo a confirmação dos seus dados:
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0 0 30px 0;">
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%"
+                                           style="background-color: #202024; padding: 20px; border-radius: 8px; color: #ffffff;">
+                                        <tr valign="top">
+                                            <td style="padding-bottom: 8px;">
+                                                <strong>Nome:</strong> <span th:text="${name}">Maria Silva</span>
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td style="padding-bottom: 8px;">
+                                                <strong>E-mail:</strong> <span
+                                                    th:text="${email}">maria.silva@emailficticio.com</span>
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td style="padding-bottom: 0px;">
+                                                <strong>Data de Nascimento:</strong> <span
+                                                    th:text="${#temporals.format(birthday, 'dd/MM/yyyy')}">15/05/1995</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td
+                                        style="padding: 0px 0 15px 0; font-size: 18px; font-weight: bold; color: #ffffff;">
+                                    O que você pode fazer agora:
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 5px 0 30px 0;">
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%"
+                                           style="color: #e1e1e6;">
+                                        <tr valign="top">
+                                            <td
+                                                    style="display: list-item; list-style: disc inside; margin-bottom: 10px;">
+                                                Explorar nossa plataforma e descobrir todas as funcionalidades
+                                                disponíveis
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td
+                                                    style="display: list-item; list-style: disc inside; margin-bottom: 10px;">
+                                                Personalizar o seu perfil de usuário
+                                            </td>
+                                        </tr>
+                                        <tr valign="top">
+                                            <td
+                                                    style="display: list-item; list-style: disc inside; margin-bottom: 10px;">
+                                                Entrar em contato com o nosso suporte em caso de dúvidas
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <!-- RODAPÉ -->
+                <tr>
+                    <td bgcolor="#121214"
+                        style="padding: 30px; border-top: 1px solid #202024; color: #a8a8b3; font-family: Arial, sans-serif; font-size: 13px;">
+                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                            <tr>
+                                <td align="center" style="padding-bottom: 5px;">
+                                    Boas-vindas via Java Mail Sender + Thymeleaf
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="center">
+                                    E-mail enviado em <span
+                                        th:text="${#temporals.format(date, 'dd/MM/yyyy')}">10/10/2026</span>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</body>
+
+</html>

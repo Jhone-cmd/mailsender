@@ -19,7 +19,8 @@ public class StudentService {
             throw new StudentAlreadyExists();
         });
 
-        studentComponent.sendSimpleWelcomeEmail(studentEntity);
+        //studentComponent.sendSimpleWelcomeEmail(studentEntity);
+        studentComponent.sendAdvancedWelcomeEmail(studentEntity);
         studentRepository.save(studentEntity);
         return;
     }

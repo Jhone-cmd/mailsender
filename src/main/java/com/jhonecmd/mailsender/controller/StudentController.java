@@ -24,7 +24,7 @@ public class StudentController {
     public ResponseEntity<Object> save(@Valid @RequestBody StudentDTO studentDTO) {
         try {
             StudentEntity student = StudentEntity.builder().name(studentDTO.getName())
-                    .email(studentDTO.getEmail()).password(studentDTO.getPassword()).build();
+                    .email(studentDTO.getEmail()).birthday(studentDTO.getBirthday()).password(studentDTO.getPassword()).build();
 
             studentService.execute(student);
             return ResponseEntity.status(HttpStatus.CREATED).body("id: " + student.getId());

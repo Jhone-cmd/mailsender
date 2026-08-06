@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -25,6 +26,7 @@ public class StudentEntity {
     @Column(unique = true)
     private String email;
     private String password;
+    private LocalDate birthday;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

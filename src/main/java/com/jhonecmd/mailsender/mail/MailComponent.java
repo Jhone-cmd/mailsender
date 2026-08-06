@@ -55,8 +55,8 @@ public abstract class MailComponent {
                 }
             }
 
-            if (!ObjectUtils.isEmpty(mailMessage.getAttachments())) {
-                for (Map.Entry<String, ClassPathResource> map: mailMessage.getAttachments().entrySet()) {
+            if (!ObjectUtils.isEmpty(mailMessage.getBodyFiles())) {
+                for (Map.Entry<String, ClassPathResource> map: mailMessage.getBodyFiles().entrySet()) {
                     helper.addInline(map.getKey(), map.getValue());
                 }
             }
