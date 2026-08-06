@@ -1,9 +1,15 @@
 package com.jhonecmd.mailsender.mail;
 
+import jakarta.mail.internet.MimeMessage;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.util.ObjectUtils;
+
+import java.util.Map;
 
 @Slf4j
 @AllArgsConstructor
@@ -12,7 +18,8 @@ public class MailComponent {
     private JavaMailSender javaMailSender;
 
     public void sendSimpleMail(MailMessage mailMessage) {
-        log.info("Sending email.");
+
+        log.info("Sending simple email.");
 
         try {
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
@@ -25,9 +32,39 @@ public class MailComponent {
 
             log.info("Simple mail sent successfully.");
 
+        } catch (Exception e) {
+            log.error("Error when tried to send the simple mail.");
+        }
+    }
+
+    public void sendAdvancedMail(MailMessage mailMessage) {
+
+        log.info("Sending advanced email.");
+
+        try {
+
+            MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+            helper.setTo(mailMessage.getTo());
+            helper.setFrom(mailMessage.getFrom());
+            helper.setSubject(mailMessage.getSubject());
+            helper.setText(mailMessage.getMessage());
+
+            if (!ObjectUtils.isEmpty(mailMessage.getAttachments())) {
+                for (Map.Entry<String, ClassPathResource> map: mailMessage.getAttachments().entrySet()) {
+                    helper.addAttachment(map.getKey(), map.getValue());
+                }
+            }
+
+            if (!ObjectUtils.isEmpty(mailMessage.getAttachments())) {
+                for (Map.Entry<String, ClassPathResource> map: mailMessage.getAttachments().entrySet()) {
+                    helper.addAttachment(map.getKey(), map.getValue());
+                }
+            }
+
 
         } catch (Exception e) {
-            log.error("Error when tried to send the mail.");
+            log.error("Error when tried to send the advanced mail.");
         }
     }
 }
